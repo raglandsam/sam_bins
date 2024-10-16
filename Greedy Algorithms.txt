@@ -1,0 +1,190 @@
+GREEDY APPROACH/ ALGORITHMS IN SOLVING OPTIMIZATION PROBLEMS 
+
+Let's say we have a problem where the final solution has to be an optimal solution. An optimal solution meets the conditions of a given constraint. It can be a minimum or maximum of the given elements.
+
+Greedy approach is a way of solving this problem by choosing the locally optimal or best choices in a belief of delivering the optimal choice globally, where locally optimal choices are just choices made at intermediate steps of the problem.
+
+The key idea is to select the best possible choice at each step, leading to a solution that may not always be the most optimal but is often good enough for many problems.
+    
+Here's a classic example : a day-to-day problem solved 'greedily'-->
+
+Problem: Given coins of different denominations (like 1, 5, 10, 25 cents), and you need to make a specific amount,say 63 cents. The goal is to use the 		 fewest number of coins possible.
+
+Greedy Approach: In this case, we pick the largest denomination first, and keep subtracting that from the total until we 
+                  can't anymore. Then, we move to the next largest denomination.
+
+Denominations:  25, 10, 5, 1 (cents)
+
+Target:63 cents
+
+Steps:  Start with 25 cents (largest coin).
+    		63 - 25 = 38 → we use 1 coin of 25 cents.
+	Again, take 25 cents.
+    		38 - 25 = 13 → now we have 2 coins of 25 cents.
+	Now move to 10 cents (next largest).
+    		13 - 10 = 3 → we use 1 coin of 10 cents.
+	Finally, use 1-cent coins.
+    		3 - 1 - 1 - 1 = 0 → we use 3 coins of 1 cent.
+	Result:
+    		We used 2 coins of 25 cents, 1 coin of 10 cents, and 3 coins of 1 cent. That’s a total of 6 coins.
+
+This is a typical greedy solution: always choosing the largest possible coin until the remainder is zero.
+
+<>STANDARD GREEDY ALGORITHMS:
+
+1)FRACTIONAL KNAPSACK ALGORITHM  :
+    A knapsack of a fixed weight limit is to be filled with items to produce maximum profit/value.
+    Each item has a profit/weight ratio. This algorithm chooses items with the highest profit to weight ratio 
+    thus using a 'Greedy' approach in solving this Problem.
+    
+    Data structure : Stack 
+
+    Example :
+    You have a knapsack with a capacity of 50 units. There are 3 items with the following weights and values:
+        
+        tem	Weight (W)	Value (V)	Value/Weight (V/W)
+        1	10	          60	          6
+        2	20	          100	          5
+        3	30	          120	          4
+
+        Step-by-Step Solution:
+            Sort items by value/weight ratio in descending order:
+
+                Item 1: 6
+                Item 2: 5
+                Item 3: 4
+            Select items:
+
+                Take all of Item 1 (Weight = 10, Value = 60). Remaining capacity = 50 - 10 = 40.
+                Take all of Item 2 (Weight = 20, Value = 100). Remaining capacity = 40 - 20 = 20.
+                Take part of Item 3 (Weight = 20/30 = 2/3 of the item). Value = 120×20/30=80
+
+            Total value in the knapsack:
+
+                Value of Item 1: 60
+                Value of Item 2: 100
+                Value of 2/3 of Item 3: 80
+                Total Value = 60 + 100 + 80 = 240.
+
+            So, the maximum value you can fit in the knapsack is 240        
+            Time complexity: O(n*logn)
+                As n items are sorted in ascending order of profit/weight ratio.
+            Space complexity : O(n)
+        
+2) DIJKSTRA'S ALGORITHM:
+    Its a greedy algorithm used to find the shortest path from a source node to all other nodes in a weighted
+    graph. It works only with non-negative edge weights.
+    
+    Datastructure : Min heap(priority queue)
+
+    Example :
+                                                                               2
+         Consider the following graph                                     A -------- B
+         Vertices: A, B, C, D, E                                          | \        |
+         weights :                                                       4|  \1      |3
+             A-B:2                                                        |   \      |
+             A-C:4                                                        C----D ----E    
+             A-D:1                                                           5     6   
+             D-E:6
+             C-D:5
+             B-E:3
+    Step-by-Step Dijkstra's Algorithm:
+        Start from node A (source) and initialize the distances:
+        Distance to A = 0 (source node)
+        Distance to all other nodes = infinity (∞)
+        Visit node A:
+
+        A → B: 0 + 2 = 2 (update distance to B: 2)
+        A → C: 0 + 4 = 4 (update distance to C: 4)
+        A → D: 0 + 1 = 1 (update distance to D: 1)
+        Updated distances:
+            A = 0, B = 2, C = 4, D = 1, E = ∞
+
+        Visit node D (smallest tentative distance, 1):
+
+            D → E: 1 + 6 = 7 (update distance to E: 7)
+            D → C: 1 + 5 = 6 (no update needed since C already has distance 4)
+        Updated distances:
+            A = 0, B = 2, C = 4, D = 1, E = 7
+
+        Visit node B (smallest tentative distance, 2):
+
+            B → E: 2 + 3 = 5 (update distance to E: 5)
+        Updated distances:
+            A = 0, B = 2, C = 4, D = 1, E = 5
+
+        Visit node C (smallest tentative distance, 4):
+
+        No updates needed (D already has a shorter path)
+        Visit node E (smallest tentative distance, 5):
+
+        No updates needed.
+        Result:
+            The shortest paths from A to all other nodes are:
+
+            A → A: 0
+            A → B: 2
+            A → C: 4
+            A → D: 1
+            A → E: 5
+        Thus, using Dijkstra's Algorithm, you have found the shortest distances from the source node A to 
+        all other nodes in the graph.
+
+        Time Complexity :O(V^2) but with min-priority queue it drops down to O (V+E)logV) ). 
+              Where :V-no. of vertices & E-no. of edges 
+        Space complexity: O(V+E)
+
+        Restrictions: Doesn't apply to graphs with negative edges.
+ 
+
+ 3) KRUSKAL'S ALGORITHM FOR MINIMUM COST SPANNING TREE :
+     John Bernard Kruskal proposed a greedy algorithm used to find the Minimum Spanning Tree (MST) of a connected,
+    undirected graph.
+    
+    The MST is a subset of the edges that connects all vertices with the minimum possible total edge weight and 
+    without forming any cycles.
+
+    Steps involved :
+            1)Sort all the edges in non-decreasing order of their weight. 
+            2)Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. 
+                If cycle is not formed, include this edge. Else, discard it. 
+            3)Repeat step 2 until there are (V-1) edges in the spanning tree.
+    Example :                                                                                 1
+		Consider the following graph with 4 vertices (A, B, C, D) and 5 edges:      A----B
+		Edge	Weight                                                              |\   |
+		A -- B	1                                                                3  | \2 | 2
+		B -- C	2                                                                   |  \ |
+		A -- C	2                                                                   D---\C
+		A -- D	3                                                                      4
+		C -- D	4
+		
+		Steps:  Sort edges by weight:[A--B (1), B--C (2), A--C (2), A--D (3), C--D (4)]
+     				1.Pick the edge A--B (weight = 1). Add it to the MST.
+				2.Pick the edge B--C (weight = 2). No cycle is formed, so add it to the MST.
+				3.Pick the edge A--C (weight = 2). This would form a cycle (A--B--C--A), so discard it.
+				4.Pick the edge A--D (weight = 3). No cycle is formed, so add it to the MST.
+
+		Now, the MST contains 3 edges (A--B, B--C, A--D) and connects all 4 vertices, so we stop.
+
+    Time Complexity : O(E*log(E)) or O(E*log(V)). 
+			where  :E-No. of edges 
+                                V-No. of vertices
+    Space complexity : O(E+V)  . Linear amount of edges and vertices are stored . 
+    Restrictions:   1.works only after sorting the weighted edges
+                    2.Only for undirected graph.
+
+The above mentioned algorithms are some of the best examples of approaching a real-world problem with a mindset of providing the best solution at each moment;Greed.
+Some other Standard greedy algorithms include :
+	4. Prim's Algorithm           :  	For finding the Minimum Spanning Tree of a graph 
+		Time complexity       :		O((V+E)Log(V))
+ 		Space complexity      :         O(V+E)
+		Data structure in use :     	Stack 
+
+	5. Huffman's coding           :  	To reduce the size of data without losing any information 
+		Time complexity       :		O(n log n) 
+ 		Space complexity      :         O(n) (No. of unique characters)
+		Data structure in use :		Min heap
+	
+  
+
+       
