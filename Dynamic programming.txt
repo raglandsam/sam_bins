@@ -1,0 +1,45 @@
+Dynamic programming (DP) is a method used to solve complex problems by breaking them down into simpler subproblems. It is applicable 
+when the subproblems overlap. It occurs when the same subproblems are solved multiple times.
+
+ DP stores the results of subproblems in a table (memoization) to avoid redundant calculations, thus improving efficiency.
+
+Example Problem: Fibonacci Sequence
+	Recursive formula: mF(n)=F(n−1)+F(n−2)
+	Using DP:
+		Bottom-Up Approach: Create an array fib of size n+1 and fill it iteratively.
+	Time Complexity: O(n)
+	Space Complexity: O(n) (can be reduced to O(1) using two variables)
+	Data Structure Used: Array (or just variables for space optimization)
+
+Here are few more p[opular DP problems :
+
+	1)0/1 Knapsack Problem
+
+		Problem: Given weights and values of items, maximize the value in a knapsack of capacity W.
+		Solution: Use a DP table to store maximum values for different capacities and items.
+		Time Complexity: O(nW)
+		Space Complexity: O(nW) (can be optimized to O(W))
+		Data Structure Used: 2D Array (or 1D array for space optimization)
+	2)Longest Common Subsequence (LCS)
+
+		Problem: Find the length of the longest subsequence common to two sequences.
+		Solution: Build a DP table where dp[i][j] represents the length of LCS of first i characters of one string and j characters of another.
+		Time Complexity: O(m*n) (m and n are lengths of the two sequences)
+		Space Complexity: O(m*n) (can be optimized to O(n))
+		Data Structure Used: 2D Array (or 1D array for space optimization)
+	3)Subset Sum Problem
+
+		Problem: Given a set of non-negative integers and a target sum, determine if there's a subset that sums to the target.
+		Solution: Use a DP table where dp[i][j] indicates whether a sum j can be formed with the first i elements.
+		Time Complexity: O(n*sum) (n is the number of elements, sum is the target sum)
+		Space Complexity: O(n*sum) (can be optimized to O(sum))
+		Data Structure Used: 2D Array (or 1D array for space optimization)
+	4)Coin Change Problem
+
+		Problem: Given denominations of coins and a total amount, find the number of ways to make the amount.
+		Solution: Use a DP array where dp[i] represents the number of ways to make the amount i.
+		Time Complexity: O(n*m) (n is amount, m is number of coin denominations)
+		Space Complexity: O(n)
+		Data Structure Used: 1D Array
+Maximum Subarray Sum (Kadane’s Algorithm)
+
